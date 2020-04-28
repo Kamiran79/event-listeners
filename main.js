@@ -87,11 +87,35 @@ const buildPies = (pieCollection) => {
     }
   
     printToDom('#pieContainer', domString);
-  }
+}
+
+const filterPiesEvent = (event) => {
+    const buttonId = event.targer.id;
+    const tempPieCollection = [];
+
+    if (buttonId === 'all') {
+        buildPies(pies);
+        return;
+    }
+
+    for (let i = 0; i < pies.length; i++) {
+        if (pies[i].owner === buttonId) {
+            tempPieCollection.push(pies[i]);
+        }
+    }    
+}
+
+const clickEvents = () => {
+    document.querySelector('#luke').addEventListener('click', filterPiesEvent);
+    document.querySelector('#micheal').addEventListener('click', filterPiesEvent);
+    document.querySelector('#matt').addEventListener('click', filterPiesEvent);
+    document.querySelector('#all').addEventListener('click', filterPiesEvent);
+}
 
 const init = () => {
     console.log('make sure it is work');
     buildPies(pies);
+    clickEvents();
 }
 
 init();
